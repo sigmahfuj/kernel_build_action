@@ -15,8 +15,8 @@ jobs:
       - name: Build Kernel
         uses: dabao1955/kernel_build_action@main
         with:
-          kernel-url: https://github.com/noonomyen/camellian-linux/tree/master/camellian-t-oss
-          kernel-dir: msm-4.14
+          kernel-url: https://github.com/noonomyen/camellian-linux
+          kernel-dir: camellian-t-oss
           kernel-branch: master
           config: camellian_gl_base_defconfig
           arch: arm64
