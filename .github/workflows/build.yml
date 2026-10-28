@@ -15,10 +15,10 @@ jobs:
       - name: Build Kernel
         uses: dabao1955/kernel_build_action@main
         with:
-          kernel-url: https://github.com/micode/xiaomi_kernel_opensource
+          kernel-url: https://github.com/noonomyen/camellian-linux/tree/master/camellian-t-oss
           kernel-dir: msm-4.14
-          kernel-branch: camellian-t-oss
-          config: camellian_defconfig
+          kernel-branch: master
+          config: camellian_gl_base_defconfig
           arch: arm64
           aosp-gcc: true
           aosp-clang: true
