@@ -1,23 +1,35 @@
-# A simple action usage
 name: Build Kernel
+
 on:
   workflow_dispatch:
 
 jobs:
   Build-Kernel:
-    strategy:
-      fail-fast: false
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+
     permissions:
       contents: read
 
     steps:
+      - name: Download Only camellian-t-oss
+        uses: actions/checkout@v4
+        with:
+          repository: noonomyen/camellian-linux
+          ref: master
+          sparse-checkout: camellian-t-oss
+          sparse-checkout-cone-mode: true
+          path: source
+
+      - name: Verify Kernel Source
+        run: |
+          ls -la source/camellian-t-oss
+          test -f source/camellian-t-oss/Makefile
+          test -d source/camellian-t-oss/arch
+
       - name: Build Kernel
         uses: dabao1955/kernel_build_action@main
         with:
-          kernel-url: https://github.com/noonomyen/camellian-linux
-          kernel-dir: camellian-t-oss
-          kernel-branch: master
+          kernel-url: ./source/camellian-t-oss/
           config: camellian_gl_base_defconfig
           arch: arm64
           aosp-gcc: true
